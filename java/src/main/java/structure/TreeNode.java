@@ -46,8 +46,8 @@ public class TreeNode {
         return sb.toString();
     }
 
-    private static void traverseNodes(StringBuilder sb, String padding, String pointer, TreeNode node,
-                                      boolean hasRightSibling) {
+    private static void traverseNodes(
+        StringBuilder sb, String padding, String pointer, TreeNode node, boolean hasRightSibling) {
         if (node == null) {
             return;
         }
@@ -161,14 +161,15 @@ public class TreeNode {
      * @return {@link TreeNode}
      */
     public static TreeNode createTestData(String data) {
-        if (data.equals("[]")) return null;
+        if (data.equals("[]"))
+            return null;
         data = data.substring(1, data.length() - 1);
         String[] split = data.split(",");
         Integer[] array = new Integer[split.length];
-        for(int i=0;i<split.length;i++){
-            if(split[i].equals("null")){
+        for (int i = 0; i < split.length; i++) {
+            if (split[i].equals("null")) {
                 array[i] = null;
-            }else{
+            } else {
                 array[i] = Integer.parseInt(split[i]);
             }
         }
@@ -216,12 +217,12 @@ public class TreeNode {
         test1();
     }
 
-    public static void test1(){
+    public static void test1() {
         TreeNode root = createTestData("[3,9,20,null,null,15,7]");
         TreeNode.printTree(root);
     }
 
-    public static void test2(){
+    public static void test2() {
         Integer[] tstData1 = {1, null, 2, 2, 32, 31, 3, 23, 1, 23, 123, 12, 3, 12, 31, 23, 2};
         TreeNode tstNode1 = constructTree(tstData1);
         System.out.println("\nTree:");
