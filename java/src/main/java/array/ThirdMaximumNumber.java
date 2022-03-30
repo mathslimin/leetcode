@@ -1,7 +1,7 @@
 package array;
 
 /**
- * Created by gouthamvidyapradhan on 25/03/2017. Given a non-empty array of integers, return the
+ * Created  on 25/03/2017. Given a non-empty array of integers, return the
  * third maximum number in this array. If it does not exist, return the maximum number. The time
  * complexity must be in O(n).
  *
@@ -22,38 +22,40 @@ package array;
  * numbers with value 2 are both considered as second maximum.
  */
 public class ThirdMaximumNumber {
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    int[] a = {1, 2};
-    System.out.println(new ThirdMaximumNumber().thirdMax(a));
-  }
-
-  public int thirdMax(int[] nums) {
-    long[] max = {Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE};
-    int count = 0;
-    for (int num : nums) {
-      for (int j = 0; j < 3; j++) {
-        if (max[j] > num) continue;
-        else if (max[j] == num) break;
-        int k = j;
-        long temp1, temp2;
-        temp1 = num;
-        count++;
-        while (k < 3) {
-          temp2 = max[k];
-          max[k] = temp1;
-          temp1 = temp2;
-          k++;
-        }
-        break;
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        int[] a = {1, 2};
+        System.out.println(new ThirdMaximumNumber().thirdMax(a));
     }
-    System.out.println(Integer.MIN_VALUE);
-    return (count >= 3) ? (int) max[2] : (int) max[0];
-  }
+
+    public int thirdMax(int[] nums) {
+        long[] max = {Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE};
+        int count = 0;
+        for (int num : nums) {
+            for (int j = 0; j < 3; j++) {
+                if (max[j] > num)
+                    continue;
+                else if (max[j] == num)
+                    break;
+                int k = j;
+                long temp1, temp2;
+                temp1 = num;
+                count++;
+                while (k < 3) {
+                    temp2 = max[k];
+                    max[k] = temp1;
+                    temp1 = temp2;
+                    k++;
+                }
+                break;
+            }
+        }
+        System.out.println(Integer.MIN_VALUE);
+        return (count >= 3) ? (int) max[2] : (int) max[0];
+    }
 }

@@ -1,7 +1,7 @@
 package dynamic_programming;
 
 /**
- * Created by gouthamvidyapradhan on 24/07/2018. A car travels from a starting position to a
+ * Created  on 24/07/2018. A car travels from a starting position to a
  * destination which is target miles east of the starting position.
  *
  * <p>Along the way, there are gas stations. Each station[i] represents a gas station that is
@@ -43,36 +43,34 @@ package dynamic_programming;
  * the target can be achieved (dp[i] >= target) will be the answer.
  */
 public class MinimumNumberOfRefuelingStops {
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        int target = 100, startFuel = 10;
+        int[][] stations = {{10, 60}, {20, 30}, {30, 30}, {60, 40}};
+        System.out.println(new MinimumNumberOfRefuelingStops().minRefuelStops(target, startFuel, stations));
+    }
 
-  /**
-   * Main method
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    int target = 100, startFuel = 10;
-    int[][] stations = {{10, 60}, {20, 30}, {30, 30}, {60, 40}};
-    System.out.println(
-        new MinimumNumberOfRefuelingStops().minRefuelStops(target, startFuel, stations));
-  }
-
-  public int minRefuelStops(int target, int startFuel, int[][] stations) {
-    long[] dp = new long[stations.length + 1];
-    dp[0] = startFuel;
-    for (int i = 0; i < stations.length; i++) {
-      int d = stations[i][0];
-      int f = stations[i][1];
-      for (int j = i; j >= 0; j--) {
-        if (dp[j] >= d) {
-          dp[j + 1] = Math.max(dp[j + 1], dp[j] + f);
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+        long[] dp = new long[stations.length + 1];
+        dp[0] = startFuel;
+        for (int i = 0; i < stations.length; i++) {
+            int d = stations[i][0];
+            int f = stations[i][1];
+            for (int j = i; j >= 0; j--) {
+                if (dp[j] >= d) {
+                    dp[j + 1] = Math.max(dp[j + 1], dp[j] + f);
+                }
+            }
         }
-      }
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] >= target) {
+                return i;
+            }
+        }
+        return -1;
     }
-    for (int i = 0; i < dp.length; i++) {
-      if (dp[i] >= target) {
-        return i;
-      }
-    }
-    return -1;
-  }
 }

@@ -3,7 +3,7 @@ package array;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 20/08/2019 Given an array A of non-negative integers, half of
+ * Created  on 20/08/2019 Given an array A of non-negative integers, half of
  * the integers in A are odd, and half of the integers are even.
  *
  * <p>Sort the array so that whenever A[i] is odd, i is odd; and whenever A[i] is even, i is even.
@@ -22,22 +22,22 @@ import java.util.*;
  * added at the index.
  */
 public class SortArrayByParityII {
-  public static void main(String[] args) {
-    //
-  }
-
-  public int[] sortArrayByParityII(int[] A) {
-    int[] R = new int[A.length];
-    int i = 0, j = 1;
-    for (int a : A) {
-      if (a % 2 == 0) {
-        R[i] = a;
-        i += 2;
-      } else {
-        R[j] = a;
-        j += 2;
-      }
+    public static void main(String[] args) {
+        //
     }
-    return R;
-  }
+
+    public int[] sortArrayByParityII(int[] A) {
+        int[] R = new int[A.length];
+        int i = 0, j = 1;
+        for (int a : A) {
+            if (a % 2 == 0) {
+                R[i] = a;
+                i += 2;
+            } else {
+                R[j] = a;
+                j += 2;
+            }
+        }
+        return R;
+    }
 }

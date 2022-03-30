@@ -3,7 +3,7 @@ package greedy;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 16/06/2020 A chef has collected data on the satisfaction level
+ * Created  on 16/06/2020 A chef has collected data on the satisfaction level
  * of his n dishes. Chef can cook any dish in 1 unit of time.
  *
  * <p>Like-time coefficient of a dish is defined as the time taken to cook that dish including
@@ -34,21 +34,22 @@ import java.util.*;
  * <p>n == satisfaction.length 1 <= n <= 500 -10^3 <= satisfaction[i] <= 10^3
  */
 public class ReducingDishes {
-  public static void main(String[] args) {
-    int[] A = {4, 3, 2};
-    System.out.println(new ReducingDishes().maxSatisfaction(A));
-  }
-
-  public int maxSatisfaction(int[] satisfaction) {
-    Queue<Integer> pq = new PriorityQueue<>(((o1, o2) -> o2 - o1));
-    Arrays.stream(satisfaction).forEach(pq::offer);
-    int max = 0, sum = 0;
-    while (!pq.isEmpty()) {
-      if ((max + sum) >= max) {
-        max += sum;
-        sum += pq.poll();
-      } else break;
+    public static void main(String[] args) {
+        int[] A = {4, 3, 2};
+        System.out.println(new ReducingDishes().maxSatisfaction(A));
     }
-    return max;
-  }
+
+    public int maxSatisfaction(int[] satisfaction) {
+        Queue<Integer> pq = new PriorityQueue<>(((o1, o2) -> o2 - o1));
+        Arrays.stream(satisfaction).forEach(pq::offer);
+        int max = 0, sum = 0;
+        while (!pq.isEmpty()) {
+            if ((max + sum) >= max) {
+                max += sum;
+                sum += pq.poll();
+            } else
+                break;
+        }
+        return max;
+    }
 }

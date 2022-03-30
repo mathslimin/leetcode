@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gouthamvidyapradhan on 10/04/2018. A string S of lowercase letters is given. We want
+ * Created  on 10/04/2018. A string S of lowercase letters is given. We want
  * to partition this string into as many parts as possible so that each letter appears in at most
  * one part, and return a list of integers representing the size of these parts.
  *
@@ -21,39 +21,39 @@ import java.util.Map;
  * check for max index, get the length and add it to the result set.
  */
 public class PartitionLabels {
-
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    System.out.println(new PartitionLabels().partitionLabels("abc"));
-  }
-
-  public List<Integer> partitionLabels(String S) {
-    if (S == null || S.trim().isEmpty()) return new ArrayList<>();
-    Map<Character, Integer> map = new HashMap<>();
-    for (int i = S.length() - 1; i >= 0; i--) {
-      char c = S.charAt(i);
-      map.putIfAbsent(c, i);
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        System.out.println(new PartitionLabels().partitionLabels("abc"));
     }
-    List<Integer> result = new ArrayList<>();
-    int start = 0;
-    int max = map.get(S.charAt(0));
-    for (int i = 0; i < S.length(); i++) {
-      char c = S.charAt(i);
-      if (map.get(c) > max) {
-        max = map.get(c);
-      } else if (i == max) {
-        result.add(max - start + 1);
-        if (i < S.length() - 1) {
-          start = i + 1;
-          max = map.get(S.charAt(i + 1));
+
+    public List<Integer> partitionLabels(String S) {
+        if (S == null || S.trim().isEmpty())
+            return new ArrayList<>();
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = S.length() - 1; i >= 0; i--) {
+            char c = S.charAt(i);
+            map.putIfAbsent(c, i);
         }
-      }
+        List<Integer> result = new ArrayList<>();
+        int start = 0;
+        int max = map.get(S.charAt(0));
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            if (map.get(c) > max) {
+                max = map.get(c);
+            } else if (i == max) {
+                result.add(max - start + 1);
+                if (i < S.length() - 1) {
+                    start = i + 1;
+                    max = map.get(S.charAt(i + 1));
+                }
+            }
+        }
+        return result;
     }
-    return result;
-  }
 }

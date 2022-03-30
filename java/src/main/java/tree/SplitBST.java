@@ -1,7 +1,7 @@
 package tree;
 
 /**
- * Created by gouthamvidyapradhan on 01/05/2018. Given a Binary Search Tree (BST) with root node
+ * Created  on 01/05/2018. Given a Binary Search Tree (BST) with root node
  * root, and a target value V, split the tree into two subtrees where one subtree has nodes that are
  * all smaller or equal to the target value, while the other subtree has all nodes that are greater
  * than the target value. It's not necessarily the case that the tree contains a node with value V.
@@ -32,53 +32,52 @@ package tree;
  * the left sub-tree. Split the right node further recursively
  */
 public class SplitBST {
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-  public static class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-      val = x;
+        TreeNode(int x) {
+            val = x;
+        }
     }
-  }
 
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    TreeNode root = new TreeNode(4);
-    root.left = new TreeNode(2);
-    root.left.left = new TreeNode(1);
-    root.left.right = new TreeNode(3);
-    root.right = new TreeNode(6);
-    root.right.left = new TreeNode(5);
-    root.right.right = new TreeNode(7);
-    root.right.right.right = new TreeNode(9);
-    TreeNode[] result = new SplitBST().splitBST(root, 3);
-  }
-
-  public TreeNode[] splitBST(TreeNode root, int V) {
-    if (root == null) {
-      return new TreeNode[] {null, null};
-    } else {
-      TreeNode[] result = new TreeNode[2];
-      if (root.val <= V) {
-        result[0] = root;
-        TreeNode[] right = splitBST(root.right, V);
-        root.right = right[0];
-        result[1] = right[1];
-        return result;
-      } else {
-        TreeNode[] left = splitBST(root.left, V);
-        root.left = left[1];
-        result[0] = left[0];
-        result[1] = root;
-        return result;
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.right = new TreeNode(6);
+        root.right.left = new TreeNode(5);
+        root.right.right = new TreeNode(7);
+        root.right.right.right = new TreeNode(9);
+        TreeNode[] result = new SplitBST().splitBST(root, 3);
     }
-  }
+
+    public TreeNode[] splitBST(TreeNode root, int V) {
+        if (root == null) {
+            return new TreeNode[] {null, null};
+        } else {
+            TreeNode[] result = new TreeNode[2];
+            if (root.val <= V) {
+                result[0] = root;
+                TreeNode[] right = splitBST(root.right, V);
+                root.right = right[0];
+                result[1] = right[1];
+                return result;
+            } else {
+                TreeNode[] left = splitBST(root.left, V);
+                root.left = left[1];
+                result[0] = left[0];
+                result[1] = root;
+                return result;
+            }
+        }
+    }
 }

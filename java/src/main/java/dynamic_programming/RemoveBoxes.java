@@ -1,6 +1,6 @@
 package dynamic_programming;
 /**
- * Created by gouthamvidyapradhan on 28/05/2019 Given several boxes with different colors
+ * Created  on 28/05/2019 Given several boxes with different colors
  * represented by different positive numbers. You may experience several rounds to remove boxes
  * until there is no box left. Each time you can choose some continuous boxes with the same color
  * (composed of k boxes, k >= 1), remove them and get k*k points. Find the maximum points you can
@@ -17,33 +17,34 @@ package dynamic_programming;
  * the count of repetitions
  */
 public class RemoveBoxes {
+    int[][][] dp;
 
-  int[][][] dp;
-
-  public static void main(String[] args) {
-    int[] boxes = {3, 3, 3};
-    System.out.println(new RemoveBoxes().removeBoxes(boxes));
-  }
-
-  public int removeBoxes(int[] boxes) {
-    dp = new int[boxes.length][boxes.length][boxes.length + 1];
-    return calculate(0, boxes.length - 1, 1, boxes);
-  }
-
-  int calculate(int l, int r, int n, int[] boxes) {
-    if (l > r) return 0;
-    else {
-      if (dp[l][r][n] != 0) return dp[l][r][n];
-      dp[l][r][n] = (n * n) + calculate(l + 1, r, 1, boxes);
-      for (int i = l + 1; i <= r; i++) {
-        int center = 0, next = 0;
-        if (boxes[l] == boxes[i]) {
-          center = calculate(l + 1, i - 1, 1, boxes);
-          next = calculate(i, r, n + 1, boxes);
-        }
-        dp[l][r][n] = Math.max(dp[l][r][n], center + next);
-      }
+    public static void main(String[] args) {
+        int[] boxes = {3, 3, 3};
+        System.out.println(new RemoveBoxes().removeBoxes(boxes));
     }
-    return dp[l][r][n];
-  }
+
+    public int removeBoxes(int[] boxes) {
+        dp = new int[boxes.length][boxes.length][boxes.length + 1];
+        return calculate(0, boxes.length - 1, 1, boxes);
+    }
+
+    int calculate(int l, int r, int n, int[] boxes) {
+        if (l > r)
+            return 0;
+        else {
+            if (dp[l][r][n] != 0)
+                return dp[l][r][n];
+            dp[l][r][n] = (n * n) + calculate(l + 1, r, 1, boxes);
+            for (int i = l + 1; i <= r; i++) {
+                int center = 0, next = 0;
+                if (boxes[l] == boxes[i]) {
+                    center = calculate(l + 1, i - 1, 1, boxes);
+                    next = calculate(i, r, n + 1, boxes);
+                }
+                dp[l][r][n] = Math.max(dp[l][r][n], center + next);
+            }
+        }
+        return dp[l][r][n];
+    }
 }

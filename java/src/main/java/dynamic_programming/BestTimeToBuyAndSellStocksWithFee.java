@@ -1,7 +1,7 @@
 package dynamic_programming;
 
 /**
- * Created by gouthamvidyapradhan on 14/12/2017. Your are given an array of integers prices, for
+ * Created  on 14/12/2017. Your are given an array of integers prices, for
  * which the i-th element is the price of a given stock on day i; and a non-negative integer fee
  * representing a transaction fee.
  *
@@ -22,24 +22,23 @@ package dynamic_programming;
  * had purchased the stock at current price. Return max cash
  */
 public class BestTimeToBuyAndSellStocksWithFee {
-
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    int[] A = {1, 3, 2, 8, 4, 9};
-    System.out.println(new BestTimeToBuyAndSellStocksWithFee().maxProfit(A, 2));
-  }
-
-  public int maxProfit(int[] prices, int fee) {
-    int cash = 0, stock = -prices[0];
-    for (int i = 1; i < prices.length; i++) {
-      cash = Math.max(cash, prices[i] + stock - fee);
-      stock = Math.max(stock, cash - prices[i]);
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        int[] A = {1, 3, 2, 8, 4, 9};
+        System.out.println(new BestTimeToBuyAndSellStocksWithFee().maxProfit(A, 2));
     }
-    return cash;
-  }
+
+    public int maxProfit(int[] prices, int fee) {
+        int cash = 0, stock = -prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            cash = Math.max(cash, prices[i] + stock - fee);
+            stock = Math.max(stock, cash - prices[i]);
+        }
+        return cash;
+    }
 }

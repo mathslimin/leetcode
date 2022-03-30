@@ -3,7 +3,7 @@ package hashing;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 01/05/2018. S and T are strings composed of lowercase letters.
+ * Created  on 01/05/2018. S and T are strings composed of lowercase letters.
  * In S, no letter occurs more than once.
  *
  * <p>S was sorted in some custom order previously. We want to permute the characters of T so that
@@ -24,41 +24,40 @@ import java.util.*;
  * <p>Solution: O(N) count occurrence of each character and write to the output string
  */
 public class CustomSortString {
-
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    System.out.println(new CustomSortString().customSortString("cba", "abcd"));
-  }
-
-  public String customSortString(String S, String T) {
-    Map<Character, Integer> map = new HashMap<>();
-    for (int i = 0; i < T.length(); i++) {
-      if (!map.containsKey(T.charAt(i))) {
-        map.put(T.charAt(i), 1);
-      } else {
-        map.put(T.charAt(i), map.get(T.charAt(i)) + 1);
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        System.out.println(new CustomSortString().customSortString("cba", "abcd"));
     }
-    StringBuilder result = new StringBuilder();
-    for (char c : S.toCharArray()) {
-      if (map.containsKey(c)) {
-        int count = map.remove(c);
-        for (int i = 0; i < count; i++) {
-          result.append(c);
+
+    public String customSortString(String S, String T) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < T.length(); i++) {
+            if (!map.containsKey(T.charAt(i))) {
+                map.put(T.charAt(i), 1);
+            } else {
+                map.put(T.charAt(i), map.get(T.charAt(i)) + 1);
+            }
         }
-      }
+        StringBuilder result = new StringBuilder();
+        for (char c : S.toCharArray()) {
+            if (map.containsKey(c)) {
+                int count = map.remove(c);
+                for (int i = 0; i < count; i++) {
+                    result.append(c);
+                }
+            }
+        }
+        for (char c : map.keySet()) {
+            int count = map.get(c);
+            for (int i = 0; i < count; i++) {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
-    for (char c : map.keySet()) {
-      int count = map.get(c);
-      for (int i = 0; i < count; i++) {
-        result.append(c);
-      }
-    }
-    return result.toString();
-  }
 }

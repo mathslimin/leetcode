@@ -3,7 +3,7 @@ package hashing;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 25/04/2019 Given an integer array with even length, where
+ * Created  on 25/04/2019 Given an integer array with even length, where
  * different numbers in this array represent different kinds of candies. Each number means one candy
  * of the corresponding kind. You need to distribute these candies equally in number to brother and
  * sister. Return the maximum number of kinds of candies the sister could gain. Example 1: Input:
@@ -21,15 +21,16 @@ import java.util.*;
  * of candies sister can get is always Min(N/2, Number Of Unique Type of Candies)
  */
 public class DistributeCandies {
-  public static void main(String[] args) {}
-
-  public int distributeCandies(int[] candies) {
-    int N = candies.length;
-    Set<Integer> set = new HashSet<>();
-    for (int c : candies) {
-      set.add(c);
+    public static void main(String[] args) {
     }
-    int n = set.size();
-    return Math.min(N / 2, set.size());
-  }
+
+    public int distributeCandies(int[] candies) {
+        int N = candies.length;
+        Set<Integer> set = new HashSet<>();
+        for (int c : candies) {
+            set.add(c);
+        }
+        int n = set.size();
+        return Math.min(N / 2, set.size());
+    }
 }

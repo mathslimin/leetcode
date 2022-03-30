@@ -1,7 +1,7 @@
 package math;
 
 /**
- * Created by gouthamvidyapradhan on 01/02/2018.
+ * Created  on 01/02/2018.
  *
  * <p>We have some permutation A of [0, 1, ..., N - 1], where N is the length of A.
  *
@@ -27,24 +27,26 @@ package math;
  * < max value return false
  */
 public class GlobalAndLocalInversions {
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {}
-
-  public boolean isIdealPermutation(int[] A) {
-    if (A.length == 0 || A.length == 1) return true;
-    int max = Integer.MIN_VALUE;
-    for (int i = 1; i < A.length; i++) {
-      if (A[i] < max) {
-        return false;
-      } else {
-        max = Math.max(max, A[i - 1]);
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
     }
-    return true;
-  }
+
+    public boolean isIdealPermutation(int[] A) {
+        if (A.length == 0 || A.length == 1)
+            return true;
+        int max = Integer.MIN_VALUE;
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] < max) {
+                return false;
+            } else {
+                max = Math.max(max, A[i - 1]);
+            }
+        }
+        return true;
+    }
 }

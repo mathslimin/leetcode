@@ -1,7 +1,7 @@
 package dynamic_programming;
 
 /**
- * Created by gouthamvidyapradhan on 30/04/2018. On a staircase, the i-th step has some non-negative
+ * Created  on 30/04/2018. On a staircase, the i-th step has some non-negative
  * cost cost[i] assigned (0 indexed).
  *
  * <p>Once you pay the cost, you can either climb one or two steps. You need to find minimum cost to
@@ -18,14 +18,15 @@ package dynamic_programming;
  * cost[i + 2]
  */
 public class MinCostClimbingStairs {
-  public static void main(String[] args) throws Exception {}
-
-  public int minCostClimbingStairs(int[] cost) {
-    for (int i = cost.length - 1; i >= 0; i--) {
-      if (i + 1 < cost.length && i + 2 < cost.length) {
-        cost[i] = Math.min(cost[i] + cost[i + 1], cost[i] + cost[i + 2]);
-      }
+    public static void main(String[] args) throws Exception {
     }
-    return Math.min(cost[0], cost[1]);
-  }
+
+    public int minCostClimbingStairs(int[] cost) {
+        for (int i = cost.length - 1; i >= 0; i--) {
+            if (i + 1 < cost.length && i + 2 < cost.length) {
+                cost[i] = Math.min(cost[i] + cost[i + 1], cost[i] + cost[i + 2]);
+            }
+        }
+        return Math.min(cost[0], cost[1]);
+    }
 }

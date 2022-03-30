@@ -1,7 +1,7 @@
 package binary_search;
 
 /**
- * Created by gouthamvidyapradhan on 23/08/2019 Koko loves to eat bananas. There are N piles of
+ * Created  on 23/08/2019 Koko loves to eat bananas. There are N piles of
  * bananas, the i-th pile has piles[i] bananas. The guards have gone and will come back in H hours.
  *
  * <p>Koko can decide her bananas-per-hour eating speed of K. Each hour, she chooses some pile of
@@ -29,47 +29,48 @@ package binary_search;
  * max(piles[i]))
  */
 public class KokoEatingBananas {
-  public static void main(String[] args) {
-    int[] A = {312884470};
-    System.out.println(new KokoEatingBananas().minEatingSpeed(A, 968709470));
-  }
-
-  public int minEatingSpeed(int[] piles, int H) {
-    int max = 0;
-    for (int i = 0; i < piles.length; i++) {
-      max = Math.max(max, piles[i]);
+    public static void main(String[] args) {
+        int[] A = {312884470};
+        System.out.println(new KokoEatingBananas().minEatingSpeed(A, 968709470));
     }
-    if (H == piles.length) return max;
-    int h = max, l = 1;
-    int answer = H;
-    while (l <= h) {
-      int m = l + (h - l) / 2;
-      boolean status = check(piles, H, m);
-      if (status) {
-        answer = m;
-        h = m - 1;
-      } else {
-        l = m + 1;
-      }
-    }
-    return answer;
-  }
 
-  private boolean check(int[] piles, int H, int k) {
-    for (int p : piles) {
-      if (p <= k) {
-        H--;
-      } else {
-        int q = p / k;
-        if ((p % k) > 0) {
-          q++;
+    public int minEatingSpeed(int[] piles, int H) {
+        int max = 0;
+        for (int i = 0; i < piles.length; i++) {
+            max = Math.max(max, piles[i]);
         }
-        H -= q;
-      }
-      if (H < 0) {
-        return false;
-      }
+        if (H == piles.length)
+            return max;
+        int h = max, l = 1;
+        int answer = H;
+        while (l <= h) {
+            int m = l + (h - l) / 2;
+            boolean status = check(piles, H, m);
+            if (status) {
+                answer = m;
+                h = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        return answer;
     }
-    return true;
-  }
+
+    private boolean check(int[] piles, int H, int k) {
+        for (int p : piles) {
+            if (p <= k) {
+                H--;
+            } else {
+                int q = p / k;
+                if ((p % k) > 0) {
+                    q++;
+                }
+                H -= q;
+            }
+            if (H < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

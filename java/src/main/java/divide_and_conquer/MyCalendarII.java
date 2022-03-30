@@ -3,7 +3,7 @@ package divide_and_conquer;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 02/11/2019 Implement a MyCalendarTwo class to store your
+ * Created  on 02/11/2019 Implement a MyCalendarTwo class to store your
  * events. A new event can be added if adding the event will not cause a triple booking.
  *
  * <p>Your class will have one method, book(int start, int end). Formally, this represents a booking
@@ -34,65 +34,64 @@ import java.util.*;
  * MyCalendar.book(start, end), start and end are integers in the range [0, 10^9].
  */
 public class MyCalendarII {
-  public static void main(String[] args) {
-    MyCalendarII t = new MyCalendarII();
-    System.out.println(t.book(20, 27));
-    System.out.println(t.book(27, 36));
-    System.out.println(t.book(27, 36));
-    System.out.println(t.book(24, 33));
-  }
-
-  private class Pair {
-    int a, b, index;
-
-    Pair(int a, int b, int index) {
-      this.a = a;
-      this.b = b;
-      this.index = index;
+    public static void main(String[] args) {
+        MyCalendarII t = new MyCalendarII();
+        System.out.println(t.book(20, 27));
+        System.out.println(t.book(27, 36));
+        System.out.println(t.book(27, 36));
+        System.out.println(t.book(24, 33));
     }
-  }
 
-  TreeSet<Pair> treeSet;
-  int count;
+    private class Pair {
+        int a, b, index;
 
-  public MyCalendarII() {
-    count = 0;
-    treeSet =
-        new TreeSet<>(
-            (o1, o2) -> {
-              int r = Integer.compare(o1.a, o2.a);
-              if (r == 0) {
+        Pair(int a, int b, int index) {
+            this.a = a;
+            this.b = b;
+            this.index = index;
+        }
+    }
+
+    TreeSet<Pair> treeSet;
+    int count;
+
+    public MyCalendarII() {
+        count = 0;
+        treeSet = new TreeSet<>((o1, o2) -> {
+            int r = Integer.compare(o1.a, o2.a);
+            if (r == 0) {
                 int r2 = Integer.compare(o1.b, o2.b);
                 if (r2 == 0) {
-                  return Integer.compare(o1.index, o2.index);
-                } else return r2;
-              }
-              return r;
-            });
-  }
-
-  public boolean book(int start, int end) {
-    Pair range = new Pair(start, end, count++);
-    Iterator<Pair> ascending = treeSet.iterator();
-    Pair prev = null;
-    while (ascending.hasNext()) {
-      Pair cur = ascending.next();
-      if (prev != null) {
-        if ((range.a >= prev.a && range.a < prev.b) && (range.a >= cur.a && range.a < cur.b)) {
-          return false;
-        } else if ((prev.a >= range.a && prev.a < range.b)
-            && (cur.a >= prev.a && cur.a < Math.min(prev.b, range.b))) {
-          return false;
-        } else if ((range.a >= prev.a && range.a < range.b)
-            && (cur.a >= range.a && cur.a < Math.min(prev.b, range.b))) {
-          return false;
-        }
-      }
-      if ((range.a >= cur.a && range.a < cur.b) || (cur.a >= range.a && cur.a < range.b)) {
-        prev = cur;
-      }
+                    return Integer.compare(o1.index, o2.index);
+                } else
+                    return r2;
+            }
+            return r;
+        });
     }
-    treeSet.add(range);
-    return true;
-  }
+
+    public boolean book(int start, int end) {
+        Pair range = new Pair(start, end, count++);
+        Iterator<Pair> ascending = treeSet.iterator();
+        Pair prev = null;
+        while (ascending.hasNext()) {
+            Pair cur = ascending.next();
+            if (prev != null) {
+                if ((range.a >= prev.a && range.a < prev.b) && (range.a >= cur.a && range.a < cur.b)) {
+                    return false;
+                } else if ((prev.a >= range.a && prev.a < range.b) &&
+                    (cur.a >= prev.a && cur.a < Math.min(prev.b, range.b))) {
+                    return false;
+                } else if ((range.a >= prev.a && range.a < range.b) &&
+                    (cur.a >= range.a && cur.a < Math.min(prev.b, range.b))) {
+                    return false;
+                }
+            }
+            if ((range.a >= cur.a && range.a < cur.b) || (cur.a >= range.a && cur.a < range.b)) {
+                prev = cur;
+            }
+        }
+        treeSet.add(range);
+        return true;
+    }
 }

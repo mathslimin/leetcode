@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * Created by gouthamvidyapradhan on 27/06/2017.
+ * Created  on 27/06/2017.
  *
  * <p>There are n different online courses numbered from 1 to n. Each course has some
  * duration(course length) t and closed on dth day. A course should be taken continuously for t days
@@ -31,20 +31,21 @@ import java.util.Queue;
  * inorder to accommodate the new course.
  */
 public class CourseScheduleIII {
-  public static void main(String[] args) throws Exception {
-    int[][] course = {{5, 5}, {2, 6}, {4, 6}};
-    System.out.println(new CourseScheduleIII().scheduleCourse(course));
-  }
-
-  public int scheduleCourse(int[][] courses) {
-    Arrays.sort(courses, (a, b) -> a[1] - b[1]);
-    Queue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
-    int time = 0;
-    for (int[] course : courses) {
-      time += course[0];
-      pq.add(course[0]);
-      if (time > course[1]) time -= pq.poll();
+    public static void main(String[] args) throws Exception {
+        int[][] course = {{5, 5}, {2, 6}, {4, 6}};
+        System.out.println(new CourseScheduleIII().scheduleCourse(course));
     }
-    return pq.size();
-  }
+
+    public int scheduleCourse(int[][] courses) {
+        Arrays.sort(courses, (a, b) -> a[1] - b[1]);
+        Queue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
+        int time = 0;
+        for (int[] course : courses) {
+            time += course[0];
+            pq.add(course[0]);
+            if (time > course[1])
+                time -= pq.poll();
+        }
+        return pq.size();
+    }
 }

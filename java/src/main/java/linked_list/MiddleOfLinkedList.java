@@ -1,7 +1,7 @@
 package linked_list;
 
 /**
- * Created by gouthamvidyapradhan on 22/03/2019 Given a non-empty, singly linked list with head node
+ * Created  on 22/03/2019 Given a non-empty, singly linked list with head node
  * head, return a middle node of linked list.
  *
  * <p>If there are two middle nodes, return the second middle node.
@@ -19,35 +19,35 @@ package linked_list;
  * <p>Solution: O(N) Return the middle node. middle = count / 2
  */
 public class MiddleOfLinkedList {
+    public class ListNode {
+        int val;
+        ListNode next;
 
-  public class ListNode {
-    int val;
-    ListNode next;
+        ListNode(int x) {
+            val = x;
+        }
+    }
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+    }
 
-    ListNode(int x) {
-      val = x;
+    public ListNode middleNode(ListNode head) {
+        int count = 0;
+        ListNode temp = head;
+        while (temp != null) {
+            temp = temp.next;
+            count++;
+        }
+        int mid = count / 2;
+        int c = 0;
+        while (head != null && c < mid) {
+            head = head.next;
+            c++;
+        }
+        return head;
     }
-  }
-  /**
-   * Main method
-   *
-   * @param args
-   */
-  public static void main(String[] args) {}
-
-  public ListNode middleNode(ListNode head) {
-    int count = 0;
-    ListNode temp = head;
-    while (temp != null) {
-      temp = temp.next;
-      count++;
-    }
-    int mid = count / 2;
-    int c = 0;
-    while (head != null && c < mid) {
-      head = head.next;
-      c++;
-    }
-    return head;
-  }
 }

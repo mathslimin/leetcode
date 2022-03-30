@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gouthamvidyapradhan on 02/03/2019 You are given a string, s, and a list of words,
+ * Created  on 02/03/2019 You are given a string, s, and a list of words,
  * words, that are all of the same length. Find all starting indices of substring(s) in s that is a
  * concatenation of each word in words exactly once and without any intervening characters.
  *
@@ -29,44 +29,44 @@ import java.util.Map;
  * word exceeds the frequency of the original word count.
  */
 public class SubstringConcatenationOfWords {
-
-  /**
-   * Main method
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    String[] words = {"word", "good", "best", "word"};
-    System.out.println(
-        new SubstringConcatenationOfWords().findSubstring("wordgoodgoodgoodbestword", words));
-  }
-
-  public List<Integer> findSubstring(String s, String[] words) {
-    if (words.length == 0) return new ArrayList<>();
-    int wLen = words[0].length();
-    int sLen = wLen * words.length;
-    List<Integer> result = new ArrayList<>();
-    if (sLen > s.length()) return result;
-    Map<String, Integer> countMap = new HashMap<>();
-    for (String w : words) {
-      countMap.putIfAbsent(w, 0);
-      countMap.put(w, countMap.get(w) + 1);
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        String[] words = {"word", "good", "best", "word"};
+        System.out.println(new SubstringConcatenationOfWords().findSubstring("wordgoodgoodgoodbestword", words));
     }
-    for (int k = 0; (s.length() - k) >= sLen; k++) {
-      Map<String, Integer> subSMap = new HashMap<>();
-      int i = k;
-      for (int j = i + wLen; (i - k) < sLen; i = j, j += wLen) {
-        String subS = s.substring(i, j);
-        subSMap.putIfAbsent(subS, 0);
-        subSMap.put(subS, subSMap.get(subS) + 1);
-        if (!countMap.containsKey(subS) || subSMap.get(subS) > countMap.get(subS)) {
-          break;
+
+    public List<Integer> findSubstring(String s, String[] words) {
+        if (words.length == 0)
+            return new ArrayList<>();
+        int wLen = words[0].length();
+        int sLen = wLen * words.length;
+        List<Integer> result = new ArrayList<>();
+        if (sLen > s.length())
+            return result;
+        Map<String, Integer> countMap = new HashMap<>();
+        for (String w : words) {
+            countMap.putIfAbsent(w, 0);
+            countMap.put(w, countMap.get(w) + 1);
         }
-      }
-      if ((i - k) >= sLen) {
-        result.add(k);
-      }
+        for (int k = 0; (s.length() - k) >= sLen; k++) {
+            Map<String, Integer> subSMap = new HashMap<>();
+            int i = k;
+            for (int j = i + wLen; (i - k) < sLen; i = j, j += wLen) {
+                String subS = s.substring(i, j);
+                subSMap.putIfAbsent(subS, 0);
+                subSMap.put(subS, subSMap.get(subS) + 1);
+                if (!countMap.containsKey(subS) || subSMap.get(subS) > countMap.get(subS)) {
+                    break;
+                }
+            }
+            if ((i - k) >= sLen) {
+                result.add(k);
+            }
+        }
+        return result;
     }
-    return result;
-  }
 }

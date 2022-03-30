@@ -3,7 +3,7 @@ package math;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 09/10/2019 Given an m * n matrix M initialized with all 0's and
+ * Created  on 09/10/2019 Given an m * n matrix M initialized with all 0's and
  * several update operations.
  *
  * <p>Operations are represented by a 2D array, and each operation is represented by an array with
@@ -28,17 +28,17 @@ import java.util.*;
  * of each row and column and return the product of minR x minC
  */
 public class RangeAdditionII {
-  public static void main(String[] args) {
-    //
-  }
-
-  public int maxCount(int m, int n, int[][] ops) {
-    int minR = m;
-    int minC = n;
-    for (int[] v : ops) {
-      minR = Math.min(minR, v[0]);
-      minC = Math.min(minC, v[1]);
+    public static void main(String[] args) {
+        //
     }
-    return minR * minC;
-  }
+
+    public int maxCount(int m, int n, int[][] ops) {
+        int minR = m;
+        int minC = n;
+        for (int[] v : ops) {
+            minR = Math.min(minR, v[0]);
+            minC = Math.min(minC, v[1]);
+        }
+        return minR * minC;
+    }
 }

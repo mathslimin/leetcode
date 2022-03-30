@@ -3,7 +3,7 @@ package dynamic_programming;
 import java.util.Arrays;
 
 /**
- * Created by gouthamvidyapradhan on 28/05/2020
+ * Created  on 28/05/2020
  *
  * <p>A program was supposed to print an array of integers. The program forgot to print whitespaces
  * and the array is printed as a string of digits and all we know is that all integers in the array
@@ -38,34 +38,37 @@ import java.util.Arrays;
  * 10^9.
  */
 public class RestoreTheArray {
-  public static void main(String[] args) {
-    System.out.println(new RestoreTheArray().numberOfArrays("19284738192", 90));
-  }
-
-  int[] DP;
-  int MOD = (int) 1e9 + 7;
-
-  public int numberOfArrays(String s, int k) {
-    DP = new int[s.length() + 1];
-    Arrays.fill(DP, -1);
-    return dp(0, s, k);
-  }
-
-  private int dp(int i, String s, int k) {
-    if (i == s.length()) return 1;
-    else if (DP[i] != -1) return DP[i];
-    else if (s.charAt(i) == '0') return 0;
-    else {
-      long sum = 0L;
-      String num = "";
-      for (int j = i; j < (i + 10) && j < s.length(); j++) {
-        num = num + s.charAt(j);
-        if (Long.parseLong(num) <= k) {
-          sum = ((sum + dp(j + 1, s, k)) % MOD);
-        }
-      }
-      DP[i] = (int) sum;
-      return DP[i];
+    public static void main(String[] args) {
+        System.out.println(new RestoreTheArray().numberOfArrays("19284738192", 90));
     }
-  }
+
+    int[] DP;
+    int MOD = (int) 1e9 + 7;
+
+    public int numberOfArrays(String s, int k) {
+        DP = new int[s.length() + 1];
+        Arrays.fill(DP, -1);
+        return dp(0, s, k);
+    }
+
+    private int dp(int i, String s, int k) {
+        if (i == s.length())
+            return 1;
+        else if (DP[i] != -1)
+            return DP[i];
+        else if (s.charAt(i) == '0')
+            return 0;
+        else {
+            long sum = 0L;
+            String num = "";
+            for (int j = i; j < (i + 10) && j < s.length(); j++) {
+                num = num + s.charAt(j);
+                if (Long.parseLong(num) <= k) {
+                    sum = ((sum + dp(j + 1, s, k)) % MOD);
+                }
+            }
+            DP[i] = (int) sum;
+            return DP[i];
+        }
+    }
 }

@@ -3,7 +3,7 @@ package math;
 import java.util.Arrays;
 
 /**
- * Created by gouthamvidyapradhan on 30/01/2020 You have n super washing machines on a line.
+ * Created  on 30/01/2020 You have n super washing machines on a line.
  * Initially, each washing machine has some dresses or is empty.
  *
  * <p>For each move, you could choose any m (1 ≤ m ≤ n) washing machines, and pass one dress of each
@@ -37,19 +37,20 @@ import java.util.Arrays;
  * machine is [0, 1e5].
  */
 public class SuperWashingMachines {
-  public static void main(String[] args) {
-    //
-  }
-
-  public int findMinMoves(int[] machines) {
-    long sum = Arrays.stream(machines).asLongStream().sum();
-    if (((sum / machines.length) < 0) || ((sum % machines.length) != 0)) return -1;
-    int n = (int) (sum / machines.length);
-    int count = 0, moves = Integer.MIN_VALUE;
-    for (int i = 0; i < machines.length; i++) {
-      count += (machines[i] - n);
-      moves = Math.max(moves, Math.max(Math.abs(count), (machines[i] - n)));
+    public static void main(String[] args) {
+        //
     }
-    return moves;
-  }
+
+    public int findMinMoves(int[] machines) {
+        long sum = Arrays.stream(machines).asLongStream().sum();
+        if (((sum / machines.length) < 0) || ((sum % machines.length) != 0))
+            return -1;
+        int n = (int) (sum / machines.length);
+        int count = 0, moves = Integer.MIN_VALUE;
+        for (int i = 0; i < machines.length; i++) {
+            count += (machines[i] - n);
+            moves = Math.max(moves, Math.max(Math.abs(count), (machines[i] - n)));
+        }
+        return moves;
+    }
 }

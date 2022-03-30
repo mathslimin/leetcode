@@ -1,7 +1,7 @@
 package dynamic_programming;
 
 /**
- * Created by gouthamvidyapradhan on 13/12/2017.
+ * Created  on 13/12/2017.
  *
  * <p>Given a string, your task is to count how many palindromic substrings in this string.
  *
@@ -17,38 +17,37 @@ package dynamic_programming;
  * is also a palindrome
  */
 public class PalindromicSubstrings {
-
-  /**
-   * Main method
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    System.out.println(new PalindromicSubstrings().countSubstrings("aaa"));
-  }
-
-  public int countSubstrings(String s) {
-    boolean[][] T = new boolean[s.length()][s.length()];
-    int count = s.length();
-    for (int i = 0, j = 0; i < T.length; i++, j++) {
-      T[i][j] = true;
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        System.out.println(new PalindromicSubstrings().countSubstrings("aaa"));
     }
 
-    for (int k = 1, col = s.length(); k < col; k++) {
-      for (int i = 0, j = k; i < col && j < col; i++, j++) {
-        if (k == 1) {
-          if (s.charAt(i) == s.charAt(j)) {
+    public int countSubstrings(String s) {
+        boolean[][] T = new boolean[s.length()][s.length()];
+        int count = s.length();
+        for (int i = 0, j = 0; i < T.length; i++, j++) {
             T[i][j] = true;
-            count++;
-          }
-        } else {
-          if (s.charAt(i) == s.charAt(j) && T[i + 1][j - 1]) {
-            T[i][j] = true;
-            count++;
-          }
         }
-      }
+
+        for (int k = 1, col = s.length(); k < col; k++) {
+            for (int i = 0, j = k; i < col && j < col; i++, j++) {
+                if (k == 1) {
+                    if (s.charAt(i) == s.charAt(j)) {
+                        T[i][j] = true;
+                        count++;
+                    }
+                } else {
+                    if (s.charAt(i) == s.charAt(j) && T[i + 1][j - 1]) {
+                        T[i][j] = true;
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
-    return count;
-  }
 }

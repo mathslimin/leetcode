@@ -3,7 +3,7 @@ package string;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 15/02/2018. Given a string and a string dictionary, find the
+ * Created  on 15/02/2018. Given a string and a string dictionary, find the
  * longest string in the dictionary that can be formed by deleting some characters of the given
  * string. If there are more than one possible results, return the longest word with the smallest
  * lexicographical order. If there is no possible result, return the empty string.
@@ -21,34 +21,33 @@ import java.util.*;
  * comparison to check for sub-sequence.
  */
 public class LongestWordInDictonary {
-
-  /**
-   * Main method
-   *
-   * @param args
-   */
-  public static void main(String[] args) throws Exception {
-    List<String> dict = Arrays.asList("ale", "apple", "monkey", "plea");
-    System.out.println(new LongestWordInDictonary().findLongestWord("abpcplea", dict));
-  }
-
-  public String findLongestWord(String s, List<String> d) {
-    Collections.sort(
-        d, Comparator.comparing(String::length).reversed().thenComparing(String::compareTo));
-    for (String str : d) {
-      if (str.length() <= s.length()) {
-        int i = 0, j = 0;
-        for (int l1 = s.length(), l2 = str.length(); i < l1 && j < l2; ) {
-          if (s.charAt(i) == str.charAt(j)) {
-            i++;
-            j++;
-          } else {
-            i++;
-          }
-        }
-        if (j >= str.length()) return str;
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) throws Exception {
+        List<String> dict = Arrays.asList("ale", "apple", "monkey", "plea");
+        System.out.println(new LongestWordInDictonary().findLongestWord("abpcplea", dict));
     }
-    return "";
-  }
+
+    public String findLongestWord(String s, List<String> d) {
+        Collections.sort(d, Comparator.comparing(String::length).reversed().thenComparing(String::compareTo));
+        for (String str : d) {
+            if (str.length() <= s.length()) {
+                int i = 0, j = 0;
+                for (int l1 = s.length(), l2 = str.length(); i < l1 && j < l2;) {
+                    if (s.charAt(i) == str.charAt(j)) {
+                        i++;
+                        j++;
+                    } else {
+                        i++;
+                    }
+                }
+                if (j >= str.length())
+                    return str;
+            }
+        }
+        return "";
+    }
 }

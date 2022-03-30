@@ -3,7 +3,7 @@ package dynamic_programming;
 import java.util.Arrays;
 
 /**
- * Created by gouthamvidyapradhan on 05/04/2020 You have a pointer at index 0 in an array of size
+ * Created  on 05/04/2020 You have a pointer at index 0 in an array of size
  * arrLen. At each step, you can move 1 position to the left, 1 position to the right in the array
  * or stay in the same place (The pointer should not be placed outside the array at any time).
  *
@@ -34,34 +34,34 @@ import java.util.Arrays;
  * each state and do a dop down dp staring from state (0, N).
  */
 public class NumberOfWaysToStayInTheSamePlace {
+    private static final int MOD = (int) (1e9 + 7);
 
-  private static final int MOD = (int) (1e9 + 7);
-
-  public static void main(String[] args) {
-    System.out.println(new NumberOfWaysToStayInTheSamePlace().numWays(500, 1000000));
-  }
-
-  int[][] DP;
-
-  public int numWays(int steps, int arrLen) {
-    int colLimit = arrLen < steps ? arrLen : steps;
-    DP = new int[colLimit + 1][steps + 1];
-    for (int i = 0; i <= colLimit; i++) {
-      Arrays.fill(DP[i], -1);
+    public static void main(String[] args) {
+        System.out.println(new NumberOfWaysToStayInTheSamePlace().numWays(500, 1000000));
     }
-    DP[0][0] = 1;
-    return (int) dp(0, steps, arrLen);
-  }
 
-  private long dp(int i, int n, int A) {
-    if (i < 0 || i >= A) return 0;
-    else if (n < 0) return 0;
-    if (DP[i][n] != -1) return DP[i][n];
-    DP[i][n] =
-        (int)
-            (((((dp(i, n - 1, A) % MOD) + (dp(i - 1, n - 1, A) % MOD)) % MOD)
-                    + (dp(i + 1, n - 1, A) % MOD))
-                % MOD);
-    return DP[i][n];
-  }
+    int[][] DP;
+
+    public int numWays(int steps, int arrLen) {
+        int colLimit = arrLen < steps ? arrLen : steps;
+        DP = new int[colLimit + 1][steps + 1];
+        for (int i = 0; i <= colLimit; i++) {
+            Arrays.fill(DP[i], -1);
+        }
+        DP[0][0] = 1;
+        return (int) dp(0, steps, arrLen);
+    }
+
+    private long dp(int i, int n, int A) {
+        if (i < 0 || i >= A)
+            return 0;
+        else if (n < 0)
+            return 0;
+        if (DP[i][n] != -1)
+            return DP[i][n];
+        DP[i][n] =
+            (int) (((((dp(i, n - 1, A) % MOD) + (dp(i - 1, n - 1, A) % MOD)) % MOD) + (dp(i + 1, n - 1, A) % MOD)) %
+                MOD);
+        return DP[i][n];
+    }
 }

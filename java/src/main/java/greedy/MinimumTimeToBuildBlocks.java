@@ -3,7 +3,7 @@ package greedy;
 import java.util.PriorityQueue;
 
 /**
- * Created by gouthamvidyapradhan on 05/05/2020 You are given a list of blocks, where blocks[i] = t
+ * Created  on 05/05/2020 You are given a list of blocks, where blocks[i] = t
  * means that the i-th block needs t units of time to be built. A block can only be built by exactly
  * one worker.
  *
@@ -34,19 +34,20 @@ import java.util.PriorityQueue;
  * <p>1 <= blocks.length <= 1000 1 <= blocks[i] <= 10^5 1 <= split <= 100
  */
 public class MinimumTimeToBuildBlocks {
-  public static void main(String[] args) {
-    int[] A = {1, 2, 3};
-    System.out.println(new MinimumTimeToBuildBlocks().minBuildTime(A, 2));
-  }
-
-  public int minBuildTime(int[] blocks, int split) {
-    PriorityQueue<Integer> queue = new PriorityQueue<>();
-    for (int b : blocks) queue.offer(b);
-    while (queue.size() != 1) {
-      int a = queue.poll();
-      int b = queue.poll();
-      queue.offer(Math.max(a, b) + split);
+    public static void main(String[] args) {
+        int[] A = {1, 2, 3};
+        System.out.println(new MinimumTimeToBuildBlocks().minBuildTime(A, 2));
     }
-    return queue.poll();
-  }
+
+    public int minBuildTime(int[] blocks, int split) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        for (int b : blocks)
+            queue.offer(b);
+        while (queue.size() != 1) {
+            int a = queue.poll();
+            int b = queue.poll();
+            queue.offer(Math.max(a, b) + split);
+        }
+        return queue.poll();
+    }
 }

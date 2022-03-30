@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 
 /**
- * Created by gouthamvidyapradhan on 12/08/2019 In a deck of cards, every card has a unique integer.
+ * Created  on 12/08/2019 In a deck of cards, every card has a unique integer.
  * You can order the deck in any order you want.
  *
  * <p>Initially, all the cards start face down (unrevealed) in one deck.
@@ -38,25 +38,26 @@ import java.util.Arrays;
  * queue.
  */
 public class RevealCardsInIncreasingOrder {
-  public static void main(String[] args) {
-    int[] A = {17, 13, 11, 2, 3, 5, 7};
-    int[] R = new RevealCardsInIncreasingOrder().deckRevealedIncreasing(A);
-  }
+    public static void main(String[] args) {
+        int[] A = {17, 13, 11, 2, 3, 5, 7};
+        int[] R = new RevealCardsInIncreasingOrder().deckRevealedIncreasing(A);
+    }
 
-  public int[] deckRevealedIncreasing(int[] deck) {
-    Arrays.sort(deck);
-    ArrayDeque<Integer> queue = new ArrayDeque<>();
-    for (int i = deck.length - 1; i >= 0; i--) {
-      queue.offer(deck[i]);
-      if (i == 0) break;
-      int temp = queue.pollFirst();
-      queue.offer(temp);
+    public int[] deckRevealedIncreasing(int[] deck) {
+        Arrays.sort(deck);
+        ArrayDeque<Integer> queue = new ArrayDeque<>();
+        for (int i = deck.length - 1; i >= 0; i--) {
+            queue.offer(deck[i]);
+            if (i == 0)
+                break;
+            int temp = queue.pollFirst();
+            queue.offer(temp);
+        }
+        int[] answer = new int[deck.length];
+        int i = 0;
+        while (!queue.isEmpty()) {
+            answer[i++] = queue.pollLast();
+        }
+        return answer;
     }
-    int[] answer = new int[deck.length];
-    int i = 0;
-    while (!queue.isEmpty()) {
-      answer[i++] = queue.pollLast();
-    }
-    return answer;
-  }
 }

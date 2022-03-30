@@ -3,7 +3,7 @@ package tree;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 28/08/2019 Given the root of a binary tree, the level of its
+ * Created  on 28/08/2019 Given the root of a binary tree, the level of its
  * root is 1, the level of its children is 2, and so on.
  *
  * <p>Return the smallest level X such that the sum of all the values of nodes at level X is
@@ -22,42 +22,42 @@ import java.util.*;
  * at that level, do a inorder search in the tree and sum up the values at each level.
  */
 public class MaximumLevelSumofABinaryTree {
-  public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-    TreeNode(int x) {
-      val = x;
+        TreeNode(int x) {
+            val = x;
+        }
     }
-  }
 
-  Map<Integer, Integer> levelMap;
+    Map<Integer, Integer> levelMap;
 
-  public static void main(String[] args) {
-    //
-  }
-
-  public int maxLevelSum(TreeNode root) {
-    levelMap = new HashMap<>();
-    inorder(root, 1);
-    int max = Integer.MIN_VALUE;
-    int ans = 0;
-    for (int k : levelMap.keySet()) {
-      if (levelMap.get(k) > max) {
-        max = levelMap.get(k);
-        ans = k;
-      }
+    public static void main(String[] args) {
+        //
     }
-    return ans;
-  }
 
-  private void inorder(TreeNode root, int level) {
-    if (root != null) {
-      levelMap.putIfAbsent(level, 0);
-      levelMap.put(level, levelMap.get(level) + root.val);
-      inorder(root.left, level + 1);
-      inorder(root.right, level + 1);
+    public int maxLevelSum(TreeNode root) {
+        levelMap = new HashMap<>();
+        inorder(root, 1);
+        int max = Integer.MIN_VALUE;
+        int ans = 0;
+        for (int k : levelMap.keySet()) {
+            if (levelMap.get(k) > max) {
+                max = levelMap.get(k);
+                ans = k;
+            }
+        }
+        return ans;
     }
-  }
+
+    private void inorder(TreeNode root, int level) {
+        if (root != null) {
+            levelMap.putIfAbsent(level, 0);
+            levelMap.put(level, levelMap.get(level) + root.val);
+            inorder(root.left, level + 1);
+            inorder(root.right, level + 1);
+        }
+    }
 }

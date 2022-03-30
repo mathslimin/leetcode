@@ -1,7 +1,7 @@
 package math;
 
 /**
- * Created by gouthamvidyapradhan on 23/06/2018. N couples sit in 2N seats arranged in a row and
+ * Created  on 23/06/2018. N couples sit in 2N seats arranged in a row and
  * want to hold hands. We want to know the minimum number of swaps so that every couple is sitting
  * side by side. A swap consists of choosing any two people, then they stand up and switch seats.
  *
@@ -28,51 +28,51 @@ package math;
  * with index i - 1. Count the total swaps and return the answer.
  */
 public class CouplesHoldingHands {
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    int[] A = {1, 3, 4, 0, 2, 5};
-    System.out.println(new CouplesHoldingHands().minSwapsCouples(A));
-  }
-
-  public int minSwapsCouples(int[] row) {
-    int N = row.length;
-    int count = 0;
-    for (int i = 0; i < N; i += 2) {
-      int pos = find(row, i);
-      if ((pos % 2) == 0) {
-        if (row[pos + 1] != i + 1) {
-          int nexNumPos = find(row, i + 1);
-          swap(row, pos + 1, nexNumPos);
-          count++;
-        }
-      } else {
-        if (row[pos - 1] != i + 1) {
-          int nexNumPos = find(row, i + 1);
-          swap(row, pos - 1, nexNumPos);
-          count++;
-        }
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        int[] A = {1, 3, 4, 0, 2, 5};
+        System.out.println(new CouplesHoldingHands().minSwapsCouples(A));
     }
-    return count;
-  }
 
-  private int find(int[] A, int n) {
-    for (int i = 0; i < A.length; i++) {
-      if (A[i] == n) {
-        return i;
-      }
+    public int minSwapsCouples(int[] row) {
+        int N = row.length;
+        int count = 0;
+        for (int i = 0; i < N; i += 2) {
+            int pos = find(row, i);
+            if ((pos % 2) == 0) {
+                if (row[pos + 1] != i + 1) {
+                    int nexNumPos = find(row, i + 1);
+                    swap(row, pos + 1, nexNumPos);
+                    count++;
+                }
+            } else {
+                if (row[pos - 1] != i + 1) {
+                    int nexNumPos = find(row, i + 1);
+                    swap(row, pos - 1, nexNumPos);
+                    count++;
+                }
+            }
+        }
+        return count;
     }
-    return -1;
-  }
 
-  private void swap(int[] A, int i, int j) {
-    int temp = A[i];
-    A[i] = A[j];
-    A[j] = temp;
-  }
+    private int find(int[] A, int n) {
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] == n) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void swap(int[] A, int i, int j) {
+        int temp = A[i];
+        A[i] = A[j];
+        A[j] = temp;
+    }
 }

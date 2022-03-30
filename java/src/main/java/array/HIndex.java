@@ -1,7 +1,7 @@
 package array;
 
 /**
- * Created by gouthamvidyapradhan on 12/12/2017. Given an array of citations (each citation is a
+ * Created  on 12/12/2017. Given an array of citations (each citation is a
  * non-negative integer) of a researcher, write a function to compute the researcher's h-index.
  *
  * <p>According to the definition of h-index on Wikipedia: "A scientist has index h if h of his/her
@@ -23,33 +23,32 @@ package array;
  * <p>The first value at index i, from right to left in array S which has i <= Si is the answer.
  */
 public class HIndex {
+    public static void main(String[] args) throws Exception {
+        int[] A = {3, 0, 6, 1, 5};
+        System.out.println(new HIndex().hIndex(A));
+    }
 
-  public static void main(String[] args) throws Exception {
-    int[] A = {3, 0, 6, 1, 5};
-    System.out.println(new HIndex().hIndex(A));
-  }
-
-  public int hIndex(int[] citations) {
-    int n = citations.length;
-    int[] count = new int[n + 1];
-    int[] S = new int[n + 1];
-    for (int i = 0; i < citations.length; i++) {
-      if (citations[i] > n) {
-        citations[i] = n;
-      }
+    public int hIndex(int[] citations) {
+        int n = citations.length;
+        int[] count = new int[n + 1];
+        int[] S = new int[n + 1];
+        for (int i = 0; i < citations.length; i++) {
+            if (citations[i] > n) {
+                citations[i] = n;
+            }
+        }
+        for (int citation : citations) {
+            count[citation]++;
+        }
+        S[n] = count[n];
+        for (int i = n - 1; i >= 0; i--) {
+            S[i] = count[i] + S[i + 1];
+        }
+        for (int i = n; i >= 0; i--) {
+            if (i <= S[i]) {
+                return i;
+            }
+        }
+        return 0;
     }
-    for (int citation : citations) {
-      count[citation]++;
-    }
-    S[n] = count[n];
-    for (int i = n - 1; i >= 0; i--) {
-      S[i] = count[i] + S[i + 1];
-    }
-    for (int i = n; i >= 0; i--) {
-      if (i <= S[i]) {
-        return i;
-      }
-    }
-    return 0;
-  }
 }

@@ -1,7 +1,7 @@
 package tree;
 
 /**
- * Created by gouthamvidyapradhan on 21/03/2017. Given a binary tree, find the lowest common
+ * Created  on 21/03/2017. Given a binary tree, find the lowest common
  * ancestor (LCA) of two given nodes in the tree.
  *
  * <p>According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined
@@ -13,33 +13,38 @@ package tree;
  * can be a descendant of itself according to the LCA definition.
  */
 public class LCA {
-  public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-    TreeNode(int x) {
-      val = x;
+        TreeNode(int x) {
+            val = x;
+        }
     }
-  }
 
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {}
-
-  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-    if (root != null) {
-      if (root.equals(p) || root.equals(q)) return root;
-      TreeNode left = lowestCommonAncestor(root.left, p, q);
-      TreeNode right = lowestCommonAncestor(root.right, p, q);
-      if (left != null && right != null) return root;
-      else if (left != null) return left;
-      else return right;
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
     }
-    return null;
-  }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root != null) {
+            if (root.equals(p) || root.equals(q))
+                return root;
+            TreeNode left = lowestCommonAncestor(root.left, p, q);
+            TreeNode right = lowestCommonAncestor(root.right, p, q);
+            if (left != null && right != null)
+                return root;
+            else if (left != null)
+                return left;
+            else
+                return right;
+        }
+        return null;
+    }
 }

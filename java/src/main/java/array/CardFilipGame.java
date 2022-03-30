@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by gouthamvidyapradhan on 04/05/2018.
+ * Created  on 04/05/2018.
  *
  * <p>On a table are N cards, with a positive integer printed on the front and back of each card
  * (possibly different).
@@ -33,28 +33,28 @@ import java.util.List;
  * <p>1 <= fronts.length == backs.length <= 1000. 1 <= fronts[i] <= 2000. 1 <= backs[i] <= 2000.
  */
 public class CardFilipGame {
-
-  public static void main(String[] args) {}
-
-  public int flipgame(int[] fronts, int[] backs) {
-    List<Integer> numbers = new ArrayList<>();
-    for (int i = 0; i < fronts.length; i++) {
-      numbers.add(fronts[i]);
-      numbers.add(backs[i]);
+    public static void main(String[] args) {
     }
-    Collections.sort(numbers);
-    for (int n : numbers) {
-      boolean success = true;
-      for (int i = 0; i < fronts.length; i++) {
-        if (n == fronts[i] && n == backs[i]) {
-          success = false;
-          break;
+
+    public int flipgame(int[] fronts, int[] backs) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < fronts.length; i++) {
+            numbers.add(fronts[i]);
+            numbers.add(backs[i]);
         }
-      }
-      if (success) {
-        return n;
-      }
+        Collections.sort(numbers);
+        for (int n : numbers) {
+            boolean success = true;
+            for (int i = 0; i < fronts.length; i++) {
+                if (n == fronts[i] && n == backs[i]) {
+                    success = false;
+                    break;
+                }
+            }
+            if (success) {
+                return n;
+            }
+        }
+        return 0;
     }
-    return 0;
-  }
 }

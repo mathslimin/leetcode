@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Created by gouthamvidyapradhan on 12/10/2019 You want to form a target string of lowercase
+ * Created  on 12/10/2019 You want to form a target string of lowercase
  * letters.
  *
  * <p>At the beginning, your sequence is target.length '?' marks. You also have a stamp of lowercase
@@ -53,70 +53,67 @@ import java.util.stream.Collectors;
  * condition then add this window index to the answer. Return the answer in the reverse order.
  */
 public class StampingTheSequence {
-  public static void main(String[] args) {
-    int[] ans = new StampingTheSequence().movesToStamp("abca", "aaaaaaaaabcaaca");
-    for (int a : ans) System.out.print(a + " ");
-  }
-
-  private class Window {
-    Set<Integer> matched, unmatched;
-
-    Window(Set<Integer> matched, Set<Integer> unmatched) {
-      this.matched = matched;
-      this.unmatched = unmatched;
+    public static void main(String[] args) {
+        int[] ans = new StampingTheSequence().movesToStamp("abca", "aaaaaaaaabcaaca");
+        for (int a : ans)
+            System.out.print(a + " ");
     }
-  }
 
-  public int[] movesToStamp(String stamp, String target) {
-    List<Window> windows = new ArrayList<>();
-    Set<Integer> matchedTarget = new HashSet<>();
-    Stack<Integer> answer = new Stack<>();
-    for (int i = 0; i <= target.length() - stamp.length(); i++) {
-      Window current = new Window(new HashSet<>(), new HashSet<>());
-      for (int j = i, s = 0; j < (i + stamp.length()); j++, s++) {
-        if (stamp.charAt(s) == target.charAt(j) || matchedTarget.contains(j)) {
-          current.matched.add(j);
-        } else current.unmatched.add(j);
-      }
-      if (current.unmatched.isEmpty()) {
-        answer.push(i);
-        matchedTarget.addAll(current.matched);
-        for (int k = windows.size() - 1; k >= 0; k--) {
-          if (!windows.get(k).unmatched.isEmpty()) {
-            Set<Integer> newUnmatched =
-                windows
-                    .get(k)
-                    .unmatched
-                    .stream()
-                    .filter(u -> !matchedTarget.contains(u))
-                    .collect(Collectors.toSet());
-            windows.get(k).unmatched = newUnmatched;
-            if (newUnmatched.isEmpty()) {
-              Set<Integer> newMatched =
-                  windows
-                      .get(k)
-                      .matched
-                      .stream()
-                      .filter(m -> !matchedTarget.contains(m))
-                      .collect(Collectors.toSet());
-              if (!newMatched.isEmpty()) {
-                answer.push(k);
-                matchedTarget.addAll(newMatched);
-              }
-            }
-          } else break;
+    private class Window {
+        Set<Integer> matched, unmatched;
+
+        Window(Set<Integer> matched, Set<Integer> unmatched) {
+            this.matched = matched;
+            this.unmatched = unmatched;
         }
-      }
-      windows.add(current);
     }
-    if (matchedTarget.size() == target.length()) {
-      int[] finalAns = new int[answer.size()];
-      int i = 0;
-      while (!answer.isEmpty()) {
-        finalAns[i++] = answer.pop();
-      }
-      return finalAns;
+
+    public int[] movesToStamp(String stamp, String target) {
+        List<Window> windows = new ArrayList<>();
+        Set<Integer> matchedTarget = new HashSet<>();
+        Stack<Integer> answer = new Stack<>();
+        for (int i = 0; i <= target.length() - stamp.length(); i++) {
+            Window current = new Window(new HashSet<>(), new HashSet<>());
+            for (int j = i, s = 0; j < (i + stamp.length()); j++, s++) {
+                if (stamp.charAt(s) == target.charAt(j) || matchedTarget.contains(j)) {
+                    current.matched.add(j);
+                } else
+                    current.unmatched.add(j);
+            }
+            if (current.unmatched.isEmpty()) {
+                answer.push(i);
+                matchedTarget.addAll(current.matched);
+                for (int k = windows.size() - 1; k >= 0; k--) {
+                    if (!windows.get(k).unmatched.isEmpty()) {
+                        Set<Integer> newUnmatched = windows.get(k)
+                                                        .unmatched.stream()
+                                                        .filter(u -> !matchedTarget.contains(u))
+                                                        .collect(Collectors.toSet());
+                        windows.get(k).unmatched = newUnmatched;
+                        if (newUnmatched.isEmpty()) {
+                            Set<Integer> newMatched = windows.get(k)
+                                                          .matched.stream()
+                                                          .filter(m -> !matchedTarget.contains(m))
+                                                          .collect(Collectors.toSet());
+                            if (!newMatched.isEmpty()) {
+                                answer.push(k);
+                                matchedTarget.addAll(newMatched);
+                            }
+                        }
+                    } else
+                        break;
+                }
+            }
+            windows.add(current);
+        }
+        if (matchedTarget.size() == target.length()) {
+            int[] finalAns = new int[answer.size()];
+            int i = 0;
+            while (!answer.isEmpty()) {
+                finalAns[i++] = answer.pop();
+            }
+            return finalAns;
+        }
+        return new int[] {};
     }
-    return new int[] {};
-  }
 }

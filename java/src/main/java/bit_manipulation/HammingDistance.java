@@ -1,7 +1,7 @@
 package bit_manipulation;
 
 /**
- * Created by gouthamvidyapradhan on 16/12/2017. The Hamming distance between two integers is the
+ * Created  on 16/12/2017. The Hamming distance between two integers is the
  * number of positions at which the corresponding bits are different.
  *
  * <p>Given two integers x and y, calculate the Hamming distance.
@@ -21,23 +21,23 @@ package bit_manipulation;
  * <p>Solution O(1): XOR (x, y) and count the number of bits set
  */
 public class HammingDistance {
-
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {}
-
-  public int hammingDistance(int x, int y) {
-    int z = (x ^ y);
-    int count = 0;
-    for (int i = 0; i < 31; i++) {
-      if ((z & (1 << i)) > 0) {
-        count++;
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
     }
-    return count;
-  }
+
+    public int hammingDistance(int x, int y) {
+        int z = (x ^ y);
+        int count = 0;
+        for (int i = 0; i < 31; i++) {
+            if ((z & (1 << i)) > 0) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

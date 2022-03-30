@@ -1,7 +1,7 @@
 package greedy;
 
 /**
- * Created by gouthamvidyapradhan on 26/04/2019
+ * Created  on 26/04/2019
  *
  * <p>At a lemonade stand, each lemonade costs $5.
  *
@@ -41,37 +41,37 @@ package greedy;
  * choosing a 10 + 5 instead of 5 + 5 + 5, this problem holds a greedy property
  */
 public class LemonadeChange {
-
-  /**
-   * Main method
-   *
-   * @param args
-   */
-  public static void main(String[] args) {}
-
-  public boolean lemonadeChange(int[] bills) {
-    int five = 0, ten = 0;
-    for (int b : bills) {
-      if (b == 5) {
-        five++;
-      } else if (b == 10) {
-        ten++;
-        if (five > 0) {
-          five--;
-        } else {
-          return false;
-        }
-      } else {
-        if (ten > 0 && five > 0) {
-          ten--;
-          five--;
-        } else if (five > 2) {
-          five -= 3;
-        } else {
-          return false;
-        }
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
     }
-    return true;
-  }
+
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0, ten = 0;
+        for (int b : bills) {
+            if (b == 5) {
+                five++;
+            } else if (b == 10) {
+                ten++;
+                if (five > 0) {
+                    five--;
+                } else {
+                    return false;
+                }
+            } else {
+                if (ten > 0 && five > 0) {
+                    ten--;
+                    five--;
+                } else if (five > 2) {
+                    five -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

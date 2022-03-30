@@ -1,7 +1,7 @@
 package two_pointers;
 
 /**
- * Created by gouthamvidyapradhan on 04/04/2019 Given string S and a dictionary of words words, find
+ * Created  on 04/04/2019 Given string S and a dictionary of words words, find
  * the number of words[i] that is a subsequence of S.
  *
  * <p>Example : Input: S = "abcde" words = ["a", "bb", "acd", "ace"] Output: 3 Explanation: There
@@ -15,42 +15,44 @@ package two_pointers;
  * string is a sub-sequence of the main string.
  */
 public class NumberOfMatchingSubsequences {
-
-  /**
-   * Main method
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-    String[] A = {"a", "bb", "acd", "ace"};
-    System.out.println(new NumberOfMatchingSubsequences().numMatchingSubseq("abcde", A));
-  }
-
-  public int numMatchingSubseq(String S, String[] words) {
-    int count = 0;
-    for (int i = 0; i < words.length; i++) {
-      String w = words[i];
-      if (isSubsequence(S, w)) {
-        count++;
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        String[] A = {"a", "bb", "acd", "ace"};
+        System.out.println(new NumberOfMatchingSubsequences().numMatchingSubseq("abcde", A));
     }
-    return count;
-  }
 
-  private boolean isSubsequence(String S, String P) {
-    int i = 0, j = 0;
-    if (P.length() > S.length()) return false;
-    for (; ; ) {
-      if (j >= P.length()) return true;
-      else if (i >= S.length()) return false;
-      else {
-        if (S.charAt(i) == P.charAt(j)) {
-          i++;
-          j++;
-        } else {
-          i++;
+    public int numMatchingSubseq(String S, String[] words) {
+        int count = 0;
+        for (int i = 0; i < words.length; i++) {
+            String w = words[i];
+            if (isSubsequence(S, w)) {
+                count++;
+            }
         }
-      }
+        return count;
     }
-  }
+
+    private boolean isSubsequence(String S, String P) {
+        int i = 0, j = 0;
+        if (P.length() > S.length())
+            return false;
+        for (;;) {
+            if (j >= P.length())
+                return true;
+            else if (i >= S.length())
+                return false;
+            else {
+                if (S.charAt(i) == P.charAt(j)) {
+                    i++;
+                    j++;
+                } else {
+                    i++;
+                }
+            }
+        }
+    }
 }

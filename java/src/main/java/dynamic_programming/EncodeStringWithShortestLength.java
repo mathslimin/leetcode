@@ -1,6 +1,6 @@
 package dynamic_programming;
 /**
- * Created by gouthamvidyapradhan on 15/09/2019 Given a non-empty string, encode the string such
+ * Created  on 15/09/2019 Given a non-empty string, encode the string such
  * that its encoded length is the shortest.
  *
  * <p>The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets
@@ -43,47 +43,44 @@ package dynamic_programming;
  * which is lesser than the current minimum.
  */
 public class EncodeStringWithShortestLength {
+    private String[][] DP;
 
-  private String[][] DP;
-
-  public static void main(String[] args) {
-    System.out.println(
-        new EncodeStringWithShortestLength()
-            .encode(
-                "xabcabcabcxxabcabcabcxxabcabcabcxxabcdabcabcxxabcabcabcxxabcabcabcxxabcabcabcxxabcabcabcx"));
-  }
-
-  public String encode(String s) {
-    DP = new String[s.length()][s.length()];
-    return encodeStr(s, 0, s.length() - 1);
-  }
-
-  private String encodeStr(String s, int i, int j) {
-    if (i == j) {
-      DP[i][j] = String.valueOf(s.charAt(i));
-      return DP[i][j];
-    } else if (DP[i][j] != null) return DP[i][j];
-    String currSubStr = s.substring(i, j + 1);
-    DP[i][j] = currSubStr;
-    for (int k = i + 1; k < j + 1; k++) {
-      String left = encodeStr(s, i, k - 1);
-      String right = encodeStr(s, k, j);
-      if (left.length() + right.length() < DP[i][j].length()) {
-        DP[i][j] = left + right;
-      }
+    public static void main(String[] args) {
+        System.out.println(new EncodeStringWithShortestLength().encode(
+            "xabcabcabcxxabcabcabcxxabcabcabcxxabcdabcabcxxabcabcabcxxabcabcabcxxabcabcabcxxabcabcabcx"));
     }
-    for (int k = i + 1; k < j + 1; k++) {
-      if (currSubStr.length() % (k - i) == 0) {
-        String subStr = s.substring(i, k);
-        if (currSubStr.replaceAll(subStr, "").trim().isEmpty()) {
-          String candidate =
-              (currSubStr.length() / subStr.length()) + "[" + encodeStr(s, i, k - 1) + "]";
-          if (candidate.length() < DP[i][j].length()) {
-            DP[i][j] = candidate;
-          }
+
+    public String encode(String s) {
+        DP = new String[s.length()][s.length()];
+        return encodeStr(s, 0, s.length() - 1);
+    }
+
+    private String encodeStr(String s, int i, int j) {
+        if (i == j) {
+            DP[i][j] = String.valueOf(s.charAt(i));
+            return DP[i][j];
+        } else if (DP[i][j] != null)
+            return DP[i][j];
+        String currSubStr = s.substring(i, j + 1);
+        DP[i][j] = currSubStr;
+        for (int k = i + 1; k < j + 1; k++) {
+            String left = encodeStr(s, i, k - 1);
+            String right = encodeStr(s, k, j);
+            if (left.length() + right.length() < DP[i][j].length()) {
+                DP[i][j] = left + right;
+            }
         }
-      }
+        for (int k = i + 1; k < j + 1; k++) {
+            if (currSubStr.length() % (k - i) == 0) {
+                String subStr = s.substring(i, k);
+                if (currSubStr.replaceAll(subStr, "").trim().isEmpty()) {
+                    String candidate = (currSubStr.length() / subStr.length()) + "[" + encodeStr(s, i, k - 1) + "]";
+                    if (candidate.length() < DP[i][j].length()) {
+                        DP[i][j] = candidate;
+                    }
+                }
+            }
+        }
+        return DP[i][j];
     }
-    return DP[i][j];
-  }
 }

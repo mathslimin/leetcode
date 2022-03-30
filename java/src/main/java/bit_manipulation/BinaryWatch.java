@@ -3,7 +3,7 @@ package bit_manipulation;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 05/11/2019 A binary watch has 4 LEDs on the top which represent
+ * Created  on 05/11/2019 A binary watch has 4 LEDs on the top which represent
  * the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).
  *
  * <p>Each LED represents a zero or one, with the least significant bit on the right.
@@ -21,35 +21,35 @@ import java.util.*;
  * may contain a leading zero, for example "10:2" is not valid, it should be "10:02".
  */
 public class BinaryWatch {
-  public static void main(String[] args) {
-    System.out.println(new BinaryWatch().readBinaryWatch(1));
-  }
+    public static void main(String[] args) {
+        System.out.println(new BinaryWatch().readBinaryWatch(1));
+    }
 
-  public List<String> readBinaryWatch(int num) {
-    int H = 11, M = 59;
-    List<String> result = new ArrayList<>();
-    if (num == 0) {
-      result.add("0:00");
-      return result;
+    public List<String> readBinaryWatch(int num) {
+        int H = 11, M = 59;
+        List<String> result = new ArrayList<>();
+        if (num == 0) {
+            result.add("0:00");
+            return result;
+        }
+        for (int i = 0; i <= H; i++) {
+            for (int j = 0; j <= M; j++) {
+                int count = 0;
+                for (int k = 0; k < 4; k++) {
+                    if (((1 << k) & i) > 0) {
+                        count++;
+                    }
+                }
+                for (int k = 0; k < 6; k++) {
+                    if (((1 << k) & j) > 0) {
+                        count++;
+                    }
+                }
+                if (count == num) {
+                    result.add(i + ":" + ((String.valueOf(j).length() == 1) ? ("0" + j) : j));
+                }
+            }
+        }
+        return result;
     }
-    for (int i = 0; i <= H; i++) {
-      for (int j = 0; j <= M; j++) {
-        int count = 0;
-        for (int k = 0; k < 4; k++) {
-          if (((1 << k) & i) > 0) {
-            count++;
-          }
-        }
-        for (int k = 0; k < 6; k++) {
-          if (((1 << k) & j) > 0) {
-            count++;
-          }
-        }
-        if (count == num) {
-          result.add(i + ":" + ((String.valueOf(j).length() == 1) ? ("0" + j) : j));
-        }
-      }
-    }
-    return result;
-  }
 }

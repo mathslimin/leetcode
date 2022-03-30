@@ -1,7 +1,7 @@
 package tree;
 
 /**
- * Created by gouthamvidyapradhan on 10/06/2017. Accepted You need to construct a string consists of
+ * Created  on 10/06/2017. Accepted You need to construct a string consists of
  * parenthesis and integers from a binary tree with the preorder traversing way.
  *
  * <p>The null node needs to be represented by empty parenthesis pair "()". And you need to omit all
@@ -22,38 +22,43 @@ package tree;
  * pair to break the one-to-one mapping relationship between the input and the output.
  */
 public class ConstructStringFromBinaryTree {
-  public static class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-    TreeNode(int x) {
-      val = x;
+        TreeNode(int x) {
+            val = x;
+        }
     }
-  }
 
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    TreeNode t = new TreeNode(1);
-    t.left = new TreeNode(2);
-    t.left.left = new TreeNode(4);
-    t.right = new TreeNode(3);
-    System.out.println(new ConstructStringFromBinaryTree().tree2str(t));
-  }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        TreeNode t = new TreeNode(1);
+        t.left = new TreeNode(2);
+        t.left.left = new TreeNode(4);
+        t.right = new TreeNode(3);
+        System.out.println(new ConstructStringFromBinaryTree().tree2str(t));
+    }
 
-  public String tree2str(TreeNode t) {
-    if (t == null) return "";
-    String left = tree2str(t.left);
-    String right = tree2str(t.right);
-    if (left.equals("") && right.equals("")) return String.valueOf(t.val);
-    if (left.equals("")) left = "()";
-    else left = "(" + left + ")";
-    if (!right.equals("")) right = "(" + right + ")";
-    return t.val + left + right;
-  }
+    public String tree2str(TreeNode t) {
+        if (t == null)
+            return "";
+        String left = tree2str(t.left);
+        String right = tree2str(t.right);
+        if (left.equals("") && right.equals(""))
+            return String.valueOf(t.val);
+        if (left.equals(""))
+            left = "()";
+        else
+            left = "(" + left + ")";
+        if (!right.equals(""))
+            right = "(" + right + ")";
+        return t.val + left + right;
+    }
 }

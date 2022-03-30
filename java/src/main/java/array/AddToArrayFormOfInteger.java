@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 25/07/2019
+ * Created  on 25/07/2019
  *
  * <p>For a non-negative integer X, the array-form of X is an array of its digits in left to right
  * order. For example, if X = 1231, then the array form is [1,2,3,1].

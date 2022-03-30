@@ -1,7 +1,7 @@
 package array;
 
 /**
- * Created by gouthamvidyapradhan on 09/02/2018. In a given integer array nums, there is always
+ * Created  on 09/02/2018. In a given integer array nums, there is always
  * exactly one largest element.
  *
  * <p>Find whether the largest element in the array is at least twice as much as every other number
@@ -26,29 +26,30 @@ package array;
  * [0, 99].
  */
 public class LargestNumberAtLeastTwice {
-
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {}
-
-  public int dominantIndex(int[] nums) {
-    int index = 0, max = Integer.MIN_VALUE;
-    for (int i = 0; i < nums.length; i++) {
-      if (nums[i] > max) {
-        max = nums[i];
-        index = i;
-      }
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
     }
-    for (int i = 0; i < nums.length; i++) {
-      if (i == index) continue;
-      if (((long) nums[i] * 2) > max) {
-        return -1;
-      }
+
+    public int dominantIndex(int[] nums) {
+        int index = 0, max = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
+                index = i;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (i == index)
+                continue;
+            if (((long) nums[i] * 2) > max) {
+                return -1;
+            }
+        }
+        return index;
     }
-    return index;
-  }
 }

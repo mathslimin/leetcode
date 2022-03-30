@@ -1,7 +1,7 @@
 package array;
 
 /**
- * Created by gouthamvidyapradhan on 08/05/2019 Given a binary array, find the maximum number of
+ * Created  on 08/05/2019 Given a binary array, find the maximum number of
  * consecutive 1s in this array.
  *
  * <p>Example 1: Input: [1,1,0,1,1,1] Output: 3 Explanation: The first two digits or the last three
@@ -11,26 +11,26 @@ package array;
  * will not exceed 10,000
  */
 public class MaxConsecutiveOnes {
-  public static void main(String[] args) {
-    //
-  }
-
-  public int findMaxConsecutiveOnes(int[] nums) {
-    int max = 0;
-    boolean flag = false;
-    int count = 0;
-    for (int i = 0; i < nums.length; i++) {
-      if (nums[i] == 1) {
-        if (!flag) {
-          flag = true;
-        }
-        count++;
-        max = Math.max(max, count);
-      } else {
-        count = 0;
-        flag = false;
-      }
+    public static void main(String[] args) {
+        //
     }
-    return max;
-  }
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int max = 0;
+        boolean flag = false;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                if (!flag) {
+                    flag = true;
+                }
+                count++;
+                max = Math.max(max, count);
+            } else {
+                count = 0;
+                flag = false;
+            }
+        }
+        return max;
+    }
 }

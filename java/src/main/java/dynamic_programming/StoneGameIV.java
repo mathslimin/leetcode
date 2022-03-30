@@ -3,7 +3,7 @@ package dynamic_programming;
 import java.util.*;
 
 /**
- * Created by gouthamvidyapradhan on 03/12/2020 Alice and Bob take turns playing a game, with Alice
+ * Created  on 03/12/2020 Alice and Bob take turns playing a game, with Alice
  * starting first.
  *
  * <p>Initially, there are n stones in a pile. On each player's turn, that player makes a move
@@ -38,51 +38,54 @@ import java.util.*;
  * <p>1 <= n <= 10^5
  */
 public class StoneGameIV {
-  public static void main(String[] args) {
-    System.out.println(new StoneGameIV().winnerSquareGame(1000));
-  }
-
-  public boolean winnerSquareGame(int n) {
-    Set<Integer> perfectSquare = new HashSet<>();
-    perfectSquare.add(1);
-    for (int i = 2; (long) (i * i) <= n; i++) {
-      genSquare(i * i, n, perfectSquare);
+    public static void main(String[] args) {
+        System.out.println(new StoneGameIV().winnerSquareGame(1000));
     }
-    int[] pq = new int[perfectSquare.size()];
-    int i = 0;
-    for (int s : perfectSquare) {
-      pq[i++] = s;
-    }
-    Arrays.sort(pq);
-    int[] DP = new int[n + 1];
-    int status = dp(n, 0, pq, DP);
-    return status != 1;
-  }
 
-  private int dp(int n, int p, int[] perfectSquares, int[] DP) {
-    if (n == 0) return 1;
-    else if (DP[n] != 0) return DP[n];
-    else {
-      int result = 1;
-      for (int sq : perfectSquares) {
-        if (n < sq) break;
-        int r = dp(n - sq, ((p + 1) % 2), perfectSquares, DP);
-        if (r == 1) {
-          result = 2;
-          break;
+    public boolean winnerSquareGame(int n) {
+        Set<Integer> perfectSquare = new HashSet<>();
+        perfectSquare.add(1);
+        for (int i = 2; (long) (i * i) <= n; i++) {
+            genSquare(i * i, n, perfectSquare);
         }
-      }
-      DP[n] = result;
-      return result;
+        int[] pq = new int[perfectSquare.size()];
+        int i = 0;
+        for (int s : perfectSquare) {
+            pq[i++] = s;
+        }
+        Arrays.sort(pq);
+        int[] DP = new int[n + 1];
+        int status = dp(n, 0, pq, DP);
+        return status != 1;
     }
-  }
 
-  private void genSquare(int sq, int limit, Set<Integer> perfectSquare) {
-    if (!perfectSquare.contains(sq)) {
-      perfectSquare.add(sq);
-      if (((long) sq * sq) <= limit) {
-        genSquare(sq * sq, limit, perfectSquare);
-      }
+    private int dp(int n, int p, int[] perfectSquares, int[] DP) {
+        if (n == 0)
+            return 1;
+        else if (DP[n] != 0)
+            return DP[n];
+        else {
+            int result = 1;
+            for (int sq : perfectSquares) {
+                if (n < sq)
+                    break;
+                int r = dp(n - sq, ((p + 1) % 2), perfectSquares, DP);
+                if (r == 1) {
+                    result = 2;
+                    break;
+                }
+            }
+            DP[n] = result;
+            return result;
+        }
     }
-  }
+
+    private void genSquare(int sq, int limit, Set<Integer> perfectSquare) {
+        if (!perfectSquare.contains(sq)) {
+            perfectSquare.add(sq);
+            if (((long) sq * sq) <= limit) {
+                genSquare(sq * sq, limit, perfectSquare);
+            }
+        }
+    }
 }

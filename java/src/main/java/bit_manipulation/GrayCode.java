@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gouthamvidyapradhan on 16/03/2017. The gray code is a binary numeral system where two
+ * Created  on 16/03/2017. The gray code is a binary numeral system where two
  * successive values differ in only one bit.
  *
  * <p>Given a non-negative integer n representing the total number of bits in the code, print the
@@ -20,20 +20,20 @@ import java.util.List;
  * that.
  */
 public class GrayCode {
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        List<Integer> result = new GrayCode().grayCode(3);
+    }
 
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    List<Integer> result = new GrayCode().grayCode(3);
-  }
-
-  public List<Integer> grayCode(int n) {
-    List<Integer> result = new ArrayList<>();
-    for (int i = 0; i <= ((1 << n) - 1); i++) result.add(i ^ (i >> 1));
-    return result;
-  }
+    public List<Integer> grayCode(int n) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i <= ((1 << n) - 1); i++)
+            result.add(i ^ (i >> 1));
+        return result;
+    }
 }

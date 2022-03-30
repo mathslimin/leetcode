@@ -3,7 +3,7 @@ package dynamic_programming;
 import java.util.Arrays;
 
 /**
- * Created by gouthamvidyapradhan on 05/05/2019 In a country popular for train travel, you have
+ * Created  on 05/05/2019 In a country popular for train travel, you have
  * planned some train travelling one year in advance. The days of the year that you will travel is
  * given as an array days. Each day is an integer from 1 to 365.
  *
@@ -38,47 +38,46 @@ import java.util.Arrays;
  * <p>Solution: O(N ^ 2 x 3)
  */
 public class MinimumCostForTickets {
-
-  public static void main(String[] args) {
-    int[] days = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31};
-    int[] costs = {2, 7, 15};
-    System.out.println(new MinimumCostForTickets().mincostTickets(days, costs));
-  }
-  /**
-   * Main method
-   *
-   * @param days
-   * @param costs
-   * @return
-   */
-  public int mincostTickets(int[] days, int[] costs) {
-    int[] min = new int[days.length];
-    Arrays.fill(min, Integer.MAX_VALUE);
-    for (int i = days.length - 1; i >= 0; i--) {
-      for (int j = 0; j < costs.length; j++) {
-        if (j == 0) {
-          min[i] = Math.min(min[i], costs[j] + ((i + 1 >= min.length) ? 0 : min[i + 1]));
-        } else if (j == 1) {
-          int c = 0;
-          for (int k = i + 1; k < days.length; k++) {
-            if (days[k] >= (days[i] + 7)) {
-              c = min[k];
-              break;
-            }
-          }
-          min[i] = Math.min(min[i], costs[j] + c);
-        } else {
-          int c = 0;
-          for (int k = i + 1; k < days.length; k++) {
-            if (days[k] >= (days[i] + 30)) {
-              c = min[k];
-              break;
-            }
-          }
-          min[i] = Math.min(min[i], costs[j] + c);
-        }
-      }
+    public static void main(String[] args) {
+        int[] days = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31};
+        int[] costs = {2, 7, 15};
+        System.out.println(new MinimumCostForTickets().mincostTickets(days, costs));
     }
-    return min[0];
-  }
+    /**
+     * Main method
+     *
+     * @param days
+     * @param costs
+     * @return
+     */
+    public int mincostTickets(int[] days, int[] costs) {
+        int[] min = new int[days.length];
+        Arrays.fill(min, Integer.MAX_VALUE);
+        for (int i = days.length - 1; i >= 0; i--) {
+            for (int j = 0; j < costs.length; j++) {
+                if (j == 0) {
+                    min[i] = Math.min(min[i], costs[j] + ((i + 1 >= min.length) ? 0 : min[i + 1]));
+                } else if (j == 1) {
+                    int c = 0;
+                    for (int k = i + 1; k < days.length; k++) {
+                        if (days[k] >= (days[i] + 7)) {
+                            c = min[k];
+                            break;
+                        }
+                    }
+                    min[i] = Math.min(min[i], costs[j] + c);
+                } else {
+                    int c = 0;
+                    for (int k = i + 1; k < days.length; k++) {
+                        if (days[k] >= (days[i] + 30)) {
+                            c = min[k];
+                            break;
+                        }
+                    }
+                    min[i] = Math.min(min[i], costs[j] + c);
+                }
+            }
+        }
+        return min[0];
+    }
 }

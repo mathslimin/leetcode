@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by gouthamvidyapradhan on 18/10/2017. Given an array nums and a target value k, find the
+ * Created  on 18/10/2017. Given an array nums and a target value k, find the
  * maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
  *
  * <p>Note: The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer
@@ -19,41 +19,40 @@ import java.util.Map;
  * <p>Follow Up: Can you do it in O(n) time?
  */
 public class MaximumSizeSubarraySumEqualsk {
-
-  /**
-   * Main method
-   *
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String[] args) throws Exception {
-    int[] A = {1, -1, 5, -2, 3};
-    System.out.println(new MaximumSizeSubarraySumEqualsk().maxSubArrayLen(A, 10));
-  }
-
-  public int maxSubArrayLen(int[] nums, int k) {
-    Map<Integer, Integer> index = new HashMap<>();
-    int sum = 0;
-    for (int i = 0; i < nums.length; i++) {
-      sum += nums[i];
-      index.putIfAbsent(sum, i);
+    /**
+     * Main method
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        int[] A = {1, -1, 5, -2, 3};
+        System.out.println(new MaximumSizeSubarraySumEqualsk().maxSubArrayLen(A, 10));
     }
-    sum = 0;
-    int ans = 0;
-    for (int i = 0; i < nums.length; i++) {
-      sum += nums[i];
-      if (sum == k) {
-        ans = Math.max(ans, i + 1);
-      } else {
-        int exp = sum - k;
-        if (index.containsKey(exp)) {
-          int farLeft = index.get(exp);
-          if (farLeft < i) {
-            ans = Math.max(ans, i - index.get(exp));
-          }
+
+    public int maxSubArrayLen(int[] nums, int k) {
+        Map<Integer, Integer> index = new HashMap<>();
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            index.putIfAbsent(sum, i);
         }
-      }
+        sum = 0;
+        int ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (sum == k) {
+                ans = Math.max(ans, i + 1);
+            } else {
+                int exp = sum - k;
+                if (index.containsKey(exp)) {
+                    int farLeft = index.get(exp);
+                    if (farLeft < i) {
+                        ans = Math.max(ans, i - index.get(exp));
+                    }
+                }
+            }
+        }
+        return ans;
     }
-    return ans;
-  }
 }
